@@ -91,6 +91,7 @@
             this.deleteIssueButton.TabIndex = 4;
             this.deleteIssueButton.Text = "Delete Issue";
             this.deleteIssueButton.UseVisualStyleBackColor = false;
+            this.deleteIssueButton.Click += new System.EventHandler(this.deleteIssueButton_Click);
             // 
             // MainForm
             // 

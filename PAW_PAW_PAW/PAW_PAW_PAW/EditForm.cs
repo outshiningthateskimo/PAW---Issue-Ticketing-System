@@ -186,52 +186,6 @@ namespace PAW_PAW_PAW
         }
 
 
-        private void modifyIssueButton_Click(object sender, EventArgs e)
-        {
-            // Check if a row is selected
-            if (dataGridView.SelectedRows.Count > 0)
-            {
-                // Get the selected row
-                DataGridViewRow selectedRow = dataGridView.SelectedRows[0];
-
-                // Get the Issue object associated with the selected row
-                Issue selectedIssue = (Issue)selectedRow.DataBoundItem;
-
-                // Create an instance of the EditForm
-                EditForm editForm = new EditForm(dataGridView, issues, developers);
-
-                // Set the values of the EditForm based on the selected issue
-                editForm.titleTextBox.Text = selectedIssue.Title;
-                editForm.descriptionTextBox.Text = selectedIssue.Description;
-                // Set the selected developer in the assignedDeveloperComboBox
-                editForm.assignedDeveloperComboBox.SelectedItem = selectedIssue.AssignedDeveloper.Name;
-                // Set the selected resolution in the resolutionComboBox
-                editForm.resolutionComboBox.SelectedItem = selectedIssue.IssueResolution.Description;
-
-                // Handle the ModifyIssueButtonClicked event in the EditForm
-                editForm.IssueModified += (s, args) =>
-                {
-                    // Update the issue in the list
-                    selectedIssue.Title = editForm.titleTextBox.Text;
-                    selectedIssue.Description = editForm.descriptionTextBox.Text;
-                    selectedIssue.AssignedDeveloper = editForm.GetAssignedDeveloper();
-                    selectedIssue.IssueResolution = editForm.GetIssueResolution();
-
-                    // Refresh the DataGridView
-                    RefreshDataGridView();
-                };
-
-                // Show the EditForm as a dialog
-                editForm.ShowDialog();
-            }
-            else
-            {
-                // No row selected, display an error message or take appropriate action
-                MessageBox.Show("Please select a row to modify.");
-            }
-        }
-
-
         public void deleteIssueButton_Click(object sender, EventArgs e)
         {
             // Check if a row is selected

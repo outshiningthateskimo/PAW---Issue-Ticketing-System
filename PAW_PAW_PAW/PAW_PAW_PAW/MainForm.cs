@@ -197,6 +197,37 @@ namespace PAW_PAW_PAW
             }
         }
 
+        private void deleteIssueButton_Click(object sender, EventArgs e)
+        {
+            // Check if there is a selected row
+            if (dataGridView.SelectedRows.Count > 0)
+            {
+                // Get the index of the selected row
+                int selectedIndex = dataGridView.SelectedRows[0].Index;
+
+                // Retrieve the selected issue from the dataGridView's DataSource
+                Issue selectedIssue = dataGridView.Rows[selectedIndex].DataBoundItem as Issue;
+
+                // Display a confirmation dialog
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this issue?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                // Check if the user confirmed the deletion
+                if (result == DialogResult.Yes)
+                {
+                    // Remove the selected issue from the list
+                    issues.Remove(selectedIssue);
+
+                    // Update the dataGridView
+                    dataGridView.DataSource = null;
+                    dataGridView.DataSource = issues;
+                }
+            }
+            else
+            {
+                // If no row is selected, display a message to the user
+                MessageBox.Show("Please select an issue to delete.", "Delete Issue", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
     }
 }
